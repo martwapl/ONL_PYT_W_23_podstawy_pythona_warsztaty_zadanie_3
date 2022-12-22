@@ -2,7 +2,7 @@ def user_input():
     """
     Return proper value provided by user
     :rtype str
-    :return:value provided by user from ['za mało', 'za dużo', 'wygrałeś]
+    :return:value provided by user from ['za mało', 'za dużo', 'wygrałeś']
     """
     possible_input = ['za mało', 'za dużo', 'wygrałeś']
     while True:
@@ -20,36 +20,19 @@ def guessing_game():
     :return: guess
     """
 
-    max = 1000
-    min = 0
-    guess = int((max - min) / 2) + min
-    try:
-        while True:
-            number_input = int(input('Wprowadź liczbę całkowitą od 1 do 1000, a ja ją zgadnę w max 10 próbach: '))
-            if number_input > 1000 or number_input < 1:
-                print('Liczba spoza zakresu')
-                continue
-            else:
-                print(guess)
-                player_response = input(f'Drogi graczu, zgadłem? ').lower()
-                proper_response = ('za dużo', 'za mało', 'zgadłeś')
-
-            if player_response not in proper_response:
-                print(f'Spodziewam się odpowiedzi:{proper_response}. Wprowadź właściwą odpowiedź')
-
-            if player_response == 'zgadłeś':
-                print('Wygrałem')
-            elif player_response == 'za dużo':
-                guess = int((max - min) / 2) + min
-                max = guess
-                print(f'Typuję numer: {guess}')
-            elif player_response == 'za mało':
-                guess = int((max - min) / 2) + min
-                min = guess
-                print(f'Typuję numer: {guess}')
-    except ValueError:
-        print('Wprowadzone dane nie są liczbą całkowitą')
-
+    input('Wprowadź liczbę od 1 do 1000. Odgadnę ją maksymalnie za 10 podejściem: ')
+    min_number = 0
+    max_number = 1000
+    user_answer = ''
+    while user_answer != 'wygrałeś':
+        guess = (max_number - min_number) // 2 + min_number
+        print(f'Typuję numer: {guess}')
+        user_answer = user_input()
+        if user_answer == 'za dużo':
+            max_number = guess
+        elif user_answer == 'za mało':
+            min_number = guess
+    print('Zgadłem')
 
 if __name__ == '__main__':
     guessing_game()
